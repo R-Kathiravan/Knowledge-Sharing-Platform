@@ -32,4 +32,4 @@ Create the database:
  
 CREATE DATABASE ksp_db;
 Import provided SQL scripts in database  folder
-CREATE DATABASE ksp_db;Import provided SQL scripts
+ 
