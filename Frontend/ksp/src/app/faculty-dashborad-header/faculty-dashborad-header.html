@@ -1,0 +1,49 @@
+<nav class="navbar">
+  <div class="nav-left">
+    <a href="/faculty">Dashboard</a>
+  </div>
+
+  <div class="nav-right">
+    <div class="search-container">
+        <div class="search-field">
+         <mat-label>Search For Events</mat-label>
+        <input matInput placeholder="Search For Events here" [(ngModel)]="searchText" (keyup)="onSearch()" />
+         </div>
+
+      <mat-card class="search-results" *ngIf="results.length > 0">
+        <mat-nav-list>
+          <a mat-list-item *ngFor="let item of results" (click)="navigateSearch(item.event_id)"
+             [routerLink]="['/event', item.event_id]">
+            <div matLine>{{ item.title || 'Untitled' }}</div>
+            <div matLine class="secondary">{{ item.file_Path }}</div>
+          </a>
+        </mat-nav-list>
+      </mat-card>
+
+      <mat-card class="search-results empty" *ngIf="results.length === 0 && searchText.length > 2">
+        <mat-list>
+          <mat-list-item>No results found.</mat-list-item>
+        </mat-list>
+      </mat-card>
+    </div>
+
+    <a routerLink="/faculty/upload-Resources" routerLinkActive="active" class="nav-link">Upload Resource</a>
+
+    <div class="profile-container" [matMenuTriggerFor]="menu">
+      <img [src]="profile()?.picture" alt="Profile" class="profile-img" />
+    </div>
+    
+    <mat-menu #menu="matMenu">
+      <div class="menu-content">
+        <p><strong>{{ profile()?.name }}</strong></p>
+        <p>Role: {{ profile()?.role || 'faculty' }}</p>
+        <p>Email: {{ profile()?.email }}</p>
+        <button mat-raised-button color="warn" (click)="logOut()">Log Out</button>
+      </div>
+    </mat-menu>
+  </div>
+</nav>
+
+<div class="dashboard">
+  <h1>Welcome, {{ profile()?.name }}</h1>
+</div>

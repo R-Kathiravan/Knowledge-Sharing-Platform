@@ -1,0 +1,35 @@
+<div class="login-container">
+  <div class="login-text-box">
+    <h1>Welcome to Our Knowledge Sharing Platform</h1>
+    <p>Please sign in to continue and access your dashboard.</p>
+  </div>
+  <div class="login-button-container">
+    <button mat-raised-button class="google-signin-button" (click)="signInWithGoogle()" *ngIf="!userProfile()">
+      <img
+        src="https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-512.png"
+        alt="Google"
+        class="google-icon"
+      />
+      Sign in with Google
+    </button>
+    <div class="role-selection" *ngIf="!userProfile()">
+      <label for="role">Select your role:</label>
+      <select id="role" [(ngModel)]="selectedRole">
+        <option value="faculty">Faculty</option>
+        <option value="supervisor">Supervisor</option>
+      </select>
+    </div>
+    <div class="user-email-display" *ngIf="userProfile()" (click)="toggleUserInfoPopup()">
+      {{ userProfile()?.email }}
+    </div>
+  </div>
+  <div class="user-info-popup" *ngIf="showUserInfoPopup()">
+    <div class="popup-content">
+      <h3>User Information</h3>
+      <p><strong>Name:</strong> {{ userProfile()?.name }}</p>
+      <p><strong>Email:</strong> {{ userProfile()?.email }}</p>
+      <button (click)="closeUserInfoPopup()">Close</button>
+      <button class="logout-button" (click)="logout()">Logout</button>
+    </div>
+  </div>
+</div>

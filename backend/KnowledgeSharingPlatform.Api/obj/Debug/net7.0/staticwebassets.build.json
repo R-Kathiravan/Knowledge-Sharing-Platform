@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "atF6/wt0fZ3TW0J0U18QW7ACWtDw9HjW0aFfhtZLnoU=",
+  "Source": "KnowledgeSharingPlatform.Api",
+  "BasePath": "_content/KnowledgeSharingPlatform.Api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

@@ -1,0 +1,60 @@
+<div class="container mx-auto p-4">
+  <mat-card class="p-6 shadow-xl">
+    <mat-card-title class="text-xl font-semibold mb-4">Create Event</mat-card-title>
+    <form (ngSubmit)="submit()" #eventForm="ngForm">
+      <div class="grid grid-cols-2 gap-4">
+        <mat-form-field appearance="outline">
+          <mat-label>Title</mat-label>
+          <input matInput [(ngModel)]="event.title" name="title" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Type</mat-label>
+          <input matInput [(ngModel)]="event.type" name="type" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Organized By</mat-label>
+          <input matInput [(ngModel)]="event.organized_By" name="organized_By" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Start Date</mat-label>
+          <input matInput type="date" [(ngModel)]="event.start_Date" name="start_Date" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>End Date</mat-label>
+          <input matInput type="date" [(ngModel)]="event.end_Date" name="end_Date" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Keywords</mat-label>
+          <input matInput [(ngModel)]="event.keywords" name="keywords">
+        </mat-form-field>
+      </div>
+
+      <div class="flex justify-end mt-4">
+        <button mat-raised-button color="primary" type="submit">Create Event</button>
+      </div>
+    </form>
+  </mat-card>
+
+<mat-card class="p-6 shadow-xl mt-8" *ngIf="eventCreated">
+  <mat-card-title class="text-xl font-semibold mb-4">Upload Resource</mat-card-title>
+  <div class="grid grid-cols-2 gap-4">
+    <input type="file" (change)="onFileChange($event)" class="border p-2">
+
+    <mat-form-field appearance="outline">
+      <mat-label>File Type</mat-label>
+      <mat-select [(ngModel)]="resources.File_Type" name="fileType">
+        <mat-option *ngFor="let type of fileTypes" [value]="type">{{ type.toUpperCase() }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="flex justify-end mt-4">
+    <button mat-raised-button color="accent" (click)="upload()">Upload Resource</button>
+  </div>
+</mat-card>
+</div>

@@ -1,0 +1,212 @@
+<div class="navbar">
+  <h4>Dashboard</h4>
+  <button [class.active]="selectedTabIndex === 0" (click)="selectedTabIndex = 0">Pending</button>
+  <button [class.active]="selectedTabIndex === 1" (click)="selectedTabIndex = 1">Approved</button>
+  <button [class.active]="selectedTabIndex === 2" (click)="selectedTabIndex = 2">Rejected</button>
+  <div class="profile-container" [matMenuTriggerFor]="menu">
+    <img [src]="profile()?.picture" alt="Profile" class="profile-img" />
+  </div>
+  <mat-menu #menu="matMenu">
+    <div class="menu-content">
+      <p><strong>{{ profile()?.name }}</strong></p>
+      <p>Role: {{ profile()?.role || 'Supervisor' }}</p>
+      <p>Email: {{ profile()?.email }}</p>
+      <button mat-raised-button color="warn" (click)="logOut()">Log Out</button>
+    </div>
+  </mat-menu>
+</div>
+
+
+
+<div *ngIf="selectedTabIndex === 0">
+  <div *ngIf="events.length === 0 && resources.length === 0" class="empty-state">
+    No pending events or resources.
+  </div>
+  <mat-accordion *ngIf="events.length > 0">
+    <mat-expansion-panel *ngFor="let event of events">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Event: {{ event.title }} (ID: {{ event.event_id }})
+        </mat-panel-title>
+        <mat-panel-description>
+          Status: {{ event.status }}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div class="event-details">
+        <p><strong>Type:</strong> {{ event.type }}</p>
+        <p><strong>Start Date:</strong> {{ event.startDate | date }}</p>
+        <p><strong>End Date:</strong> {{ event.endDate | date }}</p>
+        <p><strong>Organized By:</strong> {{ event.organized_By }}</p>
+        <p><strong>Keywords:</strong> {{ event.keywords }}</p>
+      </div>
+      <mat-table [dataSource]="getResourcesForEvent(event.event_id, 'pending')" class="resources-table"
+        multiTemplateDataRows>
+        <ng-container matColumnDef="resourceId">
+          <mat-header-cell *matHeaderCellDef> Resource ID </mat-header-cell>
+          <mat-cell *matCellDef="let resource"> {{ resource.resource_Id }} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="fileType">
+          <mat-header-cell *matHeaderCellDef> File Type </mat-header-cell>
+          <mat-cell *matCellDef="let resource"> {{ resource.file_Type || 'N/A' }} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="filePath">
+          <mat-header-cell *matHeaderCellDef> File Path </mat-header-cell>
+          <!-- <mat-cell *matCellDef="let resource"> {{ resource.file_Path }} </mat-cell> -->
+          <mat-cell *matCellDef="let resource"> <button matButton (click)="openFile(resource.file_Path)">View /Download
+              File</button> </mat-cell>
+
+        </ng-container>
+        <ng-container matColumnDef="status">
+          <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+          <mat-cell *matCellDef="let resource"> {{ resource.status }} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="views">
+          <mat-header-cell *matHeaderCellDef> Views </mat-header-cell>
+          <mat-cell *matCellDef="let resource"> {{ resource.views }} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="uploadedDate">
+          <mat-header-cell *matHeaderCellDef> Uploaded Date </mat-header-cell>
+          <mat-cell *matCellDef="let resource"> {{ resource.uploaded_at ? (resource.uploaded_at | date) : 'N/A' }}
+          </mat-cell>
+        </ng-container>
+        <mat-header-row
+          *matHeaderRowDef="['resourceId', 'fileType', 'filePath', 'status', 'views', 'uploadedDate']"></mat-header-row>
+        <mat-row
+          *matRowDef="let row; columns: ['resourceId', 'fileType', 'filePath', 'status', 'views', 'uploadedDate'];"></mat-row>
+      </mat-table>
+      <div class="action-buttons" *ngIf="selectedTabIndex === 0">
+        <button mat-raised-button color="primary" (click)="acceptEventResource(event.event_id)">Accept</button>
+        <button mat-raised-button color="warn" (click)="rejectEventResources(event.event_id)">Reject</button>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
+
+<div *ngIf="selectedTabIndex === 1">
+  <div *ngIf="approvedEvent.length === 0 && approvedResource.length === 0" class="empty-state">
+    No approved events or resources.
+  </div>
+  <mat-accordion *ngIf="approvedEvent.length > 0">
+    <mat-expansion-panel *ngFor="let event of approvedEvent">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Event: {{ event.title }} (ID: {{ event.event_id }})
+        </mat-panel-title>
+        <mat-panel-description>
+          Status: {{ event.status }}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div class="event-details">
+        <p><strong>Type:</strong> {{ event.type }}</p>
+        <p><strong>Start Date:</strong> {{ event.startDate | date }}</p>
+        <p><strong>End Date:</strong> {{ event.endDate | date }}</p>
+        <p><strong>Organized By:</strong> {{ event.organized_By }}</p>
+        <p><strong>Keywords:</strong> {{ event.keywords }}</p>
+      </div>
+      <mat-table [dataSource]="getResourcesForEvent(event.event_id, 'activated')" class="resources-table"
+        multiTemplateDataRows>
+        <ng-container matColumnDef="resourceId">
+          <mat-header-cell *matHeaderCellDef> Resource ID </mat-header-cell>
+          <mat-cell *matCellDef="let resource"> {{ resource.resource_Id }} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="fileType">
+          <mat-header-cell *matHeaderCellDef> File Type </mat-header-cell>
+          <mat-cell *matCellDef="let resource"> {{ resource.file_Type || 'N/A' }} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="filePath">
+          <mat-header-cell *matHeaderCellDef> File Path </mat-header-cell>
+          <!-- <mat-cell *matCellDef="let resource"> {{ resource.file_Path }} </mat-cell> -->
+          <mat-cell *matCellDef="let resource"> <button matButton (click)="openFile(resource.file_Path)">View /Download
+              File</button> </mat-cell>
+
+        </ng-container>
+        <ng-container matColumnDef="status">
+          <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+          <mat-cell *matCellDef="let resource"> {{ resource.status }} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="views">
+          <mat-header-cell *matHeaderCellDef> Views </mat-header-cell>
+          <mat-cell *matCellDef="let resource"> {{ resource.views }} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="uploadedDate">
+          <mat-header-cell *matHeaderCellDef> Uploaded Date </mat-header-cell>
+          <mat-cell *matCellDef="let resource"> {{ resource.uploaded_at ? (resource.uploaded_at | date) : 'N/A' }}
+          </mat-cell>
+        </ng-container>
+        <mat-header-row
+          *matHeaderRowDef="['resourceId', 'fileType', 'filePath', 'status', 'views', 'uploadedDate']"></mat-header-row>
+        <mat-row
+          *matRowDef="let row; columns: ['resourceId', 'fileType', 'filePath', 'status', 'views', 'uploadedDate'];"></mat-row>
+
+      </mat-table>
+      <div class="action-buttons" *ngIf="selectedTabIndex === 1">
+        <button mat-raised-button color="warn" (click)="rejectEventResources(event.event_id)">Reject</button>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
+
+<div *ngIf="selectedTabIndex === 2">
+  <div *ngIf="rejectedEvent.length === 0 && rejectedResource.length === 0" class="empty-state">
+    No rejected events or resources.
+  </div>
+  <mat-accordion *ngIf="rejectedEvent.length > 0">
+    <mat-expansion-panel *ngFor="let event of rejectedEvent">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Event: {{ event.title }} (ID: {{ event.event_id }})
+        </mat-panel-title>
+        <mat-panel-description>
+          Status: {{ event.status }}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div class="event-details">
+        <p><strong>Type:</strong> {{ event.type }}</p>
+        <p><strong>Start Date:</strong> {{ event.startDate | date }}</p>
+        <p><strong>End Date:</strong> {{ event.endDate | date }}</p>
+        <p><strong>Organized By:</strong> {{ event.organized_By }}</p>
+        <p><strong>Keywords:</strong> {{ event.keywords }}</p>
+
+      </div>
+      <mat-table [dataSource]="getResourcesForEvent(event.event_id, 'rejected')" class="resources-table"
+        multiTemplateDataRows>
+        <ng-container matColumnDef="resourceId">
+          <mat-header-cell *matHeaderCellDef> Resource ID </mat-header-cell>
+          <mat-cell *matCellDef="let resource"> {{ resource.resource_Id }} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="fileType">
+          <mat-header-cell *matHeaderCellDef> File Type </mat-header-cell>
+          <mat-cell *matCellDef="let resource"> {{ resource.file_Type || 'N/A' }} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="filePath">
+          <mat-header-cell *matHeaderCellDef> File Path </mat-header-cell>
+          <!-- <mat-cell *matCellDef="let resource"> {{ resource.file_Path }}  </mat-cell> -->
+          <mat-cell *matCellDef="let resource"> <button matButton (click)="openFile(resource.file_Path)">View /Download
+              File</button> </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="status">
+          <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+          <mat-cell *matCellDef="let resource"> {{ resource.status }} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="views">
+          <mat-header-cell *matHeaderCellDef> Views </mat-header-cell>
+          <mat-cell *matCellDef="let resource"> {{ resource.views }} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="uploadedDate">
+          <mat-header-cell *matHeaderCellDef> Uploaded Date </mat-header-cell>
+          <mat-cell *matCellDef="let resource"> {{ resource.uploaded_at ? (resource.uploaded_at | date) : 'N/A' }}
+          </mat-cell>
+
+        </ng-container>
+        <mat-header-row
+          *matHeaderRowDef="['resourceId', 'fileType', 'filePath', 'status', 'views', 'uploadedDate']"></mat-header-row>
+        <mat-row
+          *matRowDef="let row; columns: ['resourceId', 'fileType', 'filePath', 'status', 'views', 'uploadedDate'];"></mat-row>
+
+      </mat-table>
+      <div class="action-buttons" *ngIf="selectedTabIndex === 2">
+        <button mat-raised-button color="primary" (click)="acceptEventResource(event.event_id)">Approve</button>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

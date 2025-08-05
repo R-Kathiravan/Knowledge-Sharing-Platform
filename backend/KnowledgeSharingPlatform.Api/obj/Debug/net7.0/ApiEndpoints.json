@@ -1,0 +1,386 @@
+[
+  {
+    "ContainingType": "KnowledgeSharingPlatform.Api.Controllers.AuthController",
+    "Method": "GoogleLogin",
+    "RelativePath": "api/Auth/google-login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "KnowledgeSharingPlatform.Api.Controllers.AuthController\u002BGoogleTokenModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "KnowledgeSharingPlatform.Api.Controllers.EventsController",
+    "Method": "GetAllEvents",
+    "RelativePath": "api/Events/GetAllEvents",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "KnowledgeSharingPlatform.Api.Controllers.EventsController",
+    "Method": "GetApprovedEvents",
+    "RelativePath": "api/Events/GetApprovedEvents",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "KnowledgeSharingPlatform.Api.Controllers.EventsController",
+    "Method": "GetRejectedEvents",
+    "RelativePath": "api/Events/GetRejectedEvents",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "KnowledgeSharingPlatform.Api.Controllers.EventsController",
+    "Method": "SelectRes",
+    "RelativePath": "api/Events/SelectRes",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "KnowledgeSharingPlatform.Api.Controllers.EventsController",
+    "Method": "SubmitEvent",
+    "RelativePath": "api/Events/SubmitEvent",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "KnowledgeSharingPlatform.Api.Models.EventModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "KnowledgeSharingPlatform.Api.Controllers.FileController",
+    "Method": "ViewFile",
+    "RelativePath": "api/File/view/{fileName}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "fileName",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "KnowledgeSharingPlatform.Api.Controllers.ResourcesController",
+    "Method": "ApproveResource",
+    "RelativePath": "api/Resources/ApproveResource",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "KnowledgeSharingPlatform.Api.Controllers.ResourcesController",
+    "Method": "GetAllResources",
+    "RelativePath": "api/Resources/GetAllResources",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "KnowledgeSharingPlatform.Api.Controllers.ResourcesController",
+    "Method": "GetApprovedResources",
+    "RelativePath": "api/Resources/GetApprovedResources",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "KnowledgeSharingPlatform.Api.Controllers.ResourcesController",
+    "Method": "GetRejectedResources",
+    "RelativePath": "api/Resources/GetRejectedResources",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "KnowledgeSharingPlatform.Api.Controllers.ResourcesController",
+    "Method": "GetResources",
+    "RelativePath": "api/Resources/GetResources",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "KnowledgeSharingPlatform.Api.Controllers.ResourcesController",
+    "Method": "Search",
+    "RelativePath": "api/Resources/Search",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "keyword",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "KnowledgeSharingPlatform.Api.Controllers.ResourcesController",
+    "Method": "UploadResource",
+    "RelativePath": "api/Resources/UploadResource",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Event_Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "File_Type",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "File",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "Status",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "uploaded_at",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "KnowledgeSharingPlatform.Api.Controllers.SupervisorController",
+    "Method": "ApproveEvent",
+    "RelativePath": "api/Supervisor/ApproveEvent/{id}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "event_id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "id",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "KnowledgeSharingPlatform.Api.Controllers.SupervisorController",
+    "Method": "ApproveEventAndResourcesAsync",
+    "RelativePath": "api/Supervisor/ApproveEventAndResources/{eventId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "eventId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "KnowledgeSharingPlatform.Api.Controllers.SupervisorController",
+    "Method": "ApproveResources",
+    "RelativePath": "api/Supervisor/ApproveResources/{id}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "resource_ids",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "id",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "KnowledgeSharingPlatform.Api.Controllers.SupervisorController",
+    "Method": "GetByID",
+    "RelativePath": "api/Supervisor/GetByID",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ID",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "KnowledgeSharingPlatform.Api.Controllers.SupervisorController",
+    "Method": "GetPendingEvents",
+    "RelativePath": "api/Supervisor/PendingEvents",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[KnowledgeSharingPlatform.Api.Models.Event, KnowledgeSharingPlatform.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "KnowledgeSharingPlatform.Api.Controllers.SupervisorController",
+    "Method": "GetPendingResources",
+    "RelativePath": "api/Supervisor/PendingResources",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[KnowledgeSharingPlatform.Api.Models.Resource, KnowledgeSharingPlatform.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "KnowledgeSharingPlatform.Api.Controllers.SupervisorController",
+    "Method": "RejectEvent",
+    "RelativePath": "api/Supervisor/RejectEvent/{id}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "event_id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "id",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "KnowledgeSharingPlatform.Api.Controllers.SupervisorController",
+    "Method": "rejectEventResources",
+    "RelativePath": "api/Supervisor/RejectEventAndResources/{eventID}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "eventID",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "KnowledgeSharingPlatform.Api.Controllers.SupervisorController",
+    "Method": "RejectResources",
+    "RelativePath": "api/Supervisor/RejectResources/{id}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "resource_ids",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "id",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "KnowledgeSharingPlatform.Api.Controllers.UsersController",
+    "Method": "Login",
+    "RelativePath": "api/Users/Login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "req",
+        "Type": "KnowledgeSharingPlatform.Api.Controllers.UsersController\u002BUserLoginRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

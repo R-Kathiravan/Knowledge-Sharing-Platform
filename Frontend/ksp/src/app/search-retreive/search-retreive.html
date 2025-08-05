@@ -1,0 +1,24 @@
+  <div *ngIf="!eventData?.resources?.length" >
+    <p>No resources found for this event.</p>
+  </div>
+ <div class="container">
+  <div class="card" *ngFor="let event of eventData?.events">
+    <h2>{{ event.title }}</h2>
+    <p><strong>Organized by:</strong> {{ event.organized_By }}</p>
+    <p><strong>Type:</strong> {{ event.type }}</p>
+    <p><strong>Start Date:</strong> {{ event.startDate }}</p>
+    <p><strong>End Date:</strong> {{ event.endDate }}</p>
+    <p><strong>Status:</strong> {{ event.status }}</p>
+    <p><strong>Keywords:</strong> {{ event.keywords }}</p>
+  </div>
+
+  <div *ngFor="let resource of eventData?.resources" class="card">
+    <h3>Resource ID: {{ resource.resource_Id }}</h3>
+    <p><strong>File Type:</strong> {{ resource.file_Type }}</p>
+    <p><strong>Status:</strong> {{ resource.status }}</p>
+    <p><strong>Views:</strong> {{ resource.views }}</p>
+    <p><strong>Uploaded Date:</strong> {{ resource.uploaded_date }}</p>
+    <a class="download-btn" (click)="downloadFile(resource.file_Path)" download>Download</a>
+  </div>
+
+</div>
