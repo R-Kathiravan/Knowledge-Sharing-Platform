@@ -21,8 +21,11 @@ cd Frontend/ksp
 Install dependencies:
  
 npm install
-Create Forlder auth-config.ts, copy the code from auth-config.sample.ts and paste it and update your Google OAuth Client ID 
+
+Create a File auth-config.ts, copy the code from auth-config.sample.ts and paste it and update your Google OAuth Client ID in 
 src/app/auth-config.ts
+
+
 Serve the frontend:
 ng serve
 Frontend runs at: http://localhost:4200
